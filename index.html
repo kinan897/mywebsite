@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>Kinan Al Hariri — Aspiring Engineer & CS Student</title>
+
+  <meta name="description" content="Portfolio of Kinan Al Hariri — aspiring engineer and CS student. Robotics, app development, and game projects.">
+
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!--
+    <body> is everything a visitor actually SEES.
+  -->
+
+  <!-- ========================================================
+       NAVIGATION — the menu bar at the top
+       ========================================================
+       Links starting with # are "anchor links". They don't load a
+       new page; they jump to the element on THIS page whose
+       id matches. href="#projects" jumps to id="projects".
+  -->
+  <header>
+    <nav>
+      <a href="#top">KA</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#games">Games</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ========================================================
+       HERO — the first thing people see
+       ========================================================
+       <main> wraps the primary content of the page. Screen readers
+       for blind users rely on these landmark tags to navigate.
+  -->
+  <main id="top">
+
+    <section id="hero">
+      <!-- There should be exactly ONE <h1> per page. It is the
+           single most important line of text on the page, and
+           search engines weight it heavily. -->
+      <h1>Kinan Al Hariri</h1>
+
+      <!-- <p> = paragraph. Your one-line tagline. -->
+      <p>Aspiring Engineer · CS Student</p>
+
+      <p>
+        I build at the intersection of hardware and software — from a
+        competition robot with a swerve-drive base to mobile apps
+        . Three years of hands-on coding across Python, Java,
+        JavaScript, and React Native, with a growing habit of shipping
+        things that actually work.
+      </p>
+
+      <!--
+        THE LINKEDIN LINK — this is the one you specifically asked for.
+
+        href     = where it goes
+        target="_blank"  = open in a NEW tab, so people don't
+                           leave your site to go to LinkedIn
+        rel="noopener"   = a security precaution. Without it, the
+                           page you opened gets limited scripting
+                           access back to yours. Always include it
+                           alongside target="_blank".
+      -->
+      <a href="https://www.linkedin.com/in/kinan-alhariri-09b240375/"
+         target="_blank"
+         rel="noopener">
+        View my LinkedIn
+      </a>
+    </section>
+
+    <!-- ========================================================
+         EXPERIENCE — your co-op
+         ========================================================
+         Notice the WHOLE <article> is now wrapped in an <a> tag.
+         Normally a link wraps just a word or two of text — but
+         HTML allows wrapping an entire block of content (heading,
+         paragraph, everything) in one <a>, which makes the ENTIRE
+         card clickable instead of just one line inside it. This
+         is a real, valid, common pattern — not a hack.
+
+         Each card is now a short TEASER, not the full story. The
+         full writeup lives on its own page in the pages/ folder.
+    -->
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <a href="pages/experience.html" class="card-link">
+        <article>
+          <p class="card-eyebrow">Co-op Placement</p>
+          <h3>Mobile App Developer</h3>
+          <p>CEC Career Education Council &middot; Swift &amp; Xcode</p>
+          <span class="card-more">Read more &rarr;</span>
+        </article>
+      </a>
+    </section>
+
+    <!-- ========================================================
+         PROJECTS — pictures of things you've built
+         ========================================================
+         Each project is an <article>: a self-contained chunk of
+         content that would still make sense on its own.
+
+         About the images:
+           src = the path to the image file. "images/thing.png"
+                 means "look in a folder called images, next to
+                 this HTML file, for a file called thing.png"
+           alt = a text description. Shown if the image fails to
+                 load, and READ ALOUD to blind visitors. Never
+                 leave it empty on a meaningful image.
+
+         Until you drop real image files into the images folder,
+         you'll see the alt text instead of a picture. That's
+         expected, not broken.
+    -->
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <a href="pages/robot.html" class="card-link">
+        <article>
+          <img src="images/robot.jpg" alt="VEX competition robot with a swerve-drive base and chain-driven ball intake, held next to a Catholic Skills medal">
+          <p class="card-eyebrow">VEX Robotics</p>
+          <h3>Competition Ball-Intake Robot</h3>
+          <p>Swerve-drive base &middot; chain-driven intake &middot; medal winner</p>
+          <span class="card-more">Read more &rarr;</span>
+        </article>
+      </a>
+
+      <a href="pages/motivez.html" class="card-link">
+        <article>
+          <img src="images/motivez.png" alt="Motivez logo">
+          <p class="card-eyebrow">Team Project</p>
+          <h3>Motivez</h3>
+          <p>Social discovery app &middot; React Native &amp; Supabase</p>
+          <span class="card-more">Read more &rarr;</span>
+        </article>
+      </a>
+
+      <!-- Copy an entire <a class="card-link">...</a> block to add another. -->
+    </section>
+
+    <!-- ========================================================
+         GAMES — links people can click to play
+         ======================================================== -->
+    <section id="games">
+      <h2>Games</h2>
+
+      <!-- These two cards have no image, no link, and no detail
+           page yet — they're placeholders. Once you have real
+           game info: build pages/game-1.html the same way we
+           built pages/robot.html, then wrap this <article> in
+           <a href="pages/game-1.html" class="card-link"> exactly
+           like the Projects cards above. -->
+      <article class="coming-soon">
+        <h3>Game #1</h3>
+        <p>Coming soon.</p>
+      </article>
+
+      <article class="coming-soon">
+        <h3>Game #2</h3>
+        <p>Coming soon.</p>
+      </article>
+    </section>
+
+    <!-- ========================================================
+         CONTACT
+         ========================================================
+         mailto: makes a link open the visitor's email app with
+         your address already filled in.
+    -->
+    <section id="contact">
+      <h2>Get in touch</h2>
+      <p>Open to co-op roles, collaborations, and anything at the intersection of hardware and software.</p>
+      <a href="mailto:kinanalhariri88@gmail.com">kinanalhariri88@gmail.com</a>
+      <a href="https://www.linkedin.com/in/kinan-alhariri-09b240375/" target="_blank" rel="noopener">LinkedIn</a>
+    </section>
+
+  </main>
+
+  <!-- <footer> = the closing strip at the bottom of the page. -->
+  <footer>
+    <p>&copy; 2026 Kinan Al Hariri</p>
+  </footer>
+
+  <!-- Connects our JavaScript. Placed at the very bottom on purpose:
+       the browser reads this file top to bottom, so by the time it
+       reaches here, all the elements above already exist and the
+       script can find them. Does nothing yet — that's step 3. -->
+  <script src="script.js"></script>
+</body>
+
+</html>

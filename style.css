@@ -1,0 +1,744 @@
+/* ============================================================
+   style.css  —  PASS 1: FOUNDATIONS
+   ============================================================
+   This is the "paint palette" for the whole site. We're not
+   styling any specific element yet (no header, no cards) — just
+   setting up variables and global defaults that everything else
+   will build on in the next passes.
+
+   Nothing will look dramatically different yet after this pass.
+   You'll mostly see: the background turn dark, the font change,
+   and default browser spacing disappear. That's expected — the
+   big visual transformation happens in Pass 2 (layout) and
+   Pass 3 (cards).
+*/
+
+/* ------------------------------------------------------------
+   CSS VARIABLES (aka "custom properties")
+   ------------------------------------------------------------
+   A variable is a named value you can reuse everywhere instead
+   of retyping it. Defining --accent: #39ff88 once here means
+   every future "var(--accent)" in this file pulls that same
+   green. Change the color ONCE at the top, and it updates
+   everywhere it's used — that's the whole point.
+
+   :root means "the whole document" — these variables become
+   available to every single element on the page.
+*/
+:root {
+  /* --- Colors ---
+       Light theme: white/near-white background with a pink
+       accent. Every one of these lines is the ONLY place that
+       color is defined — everything else in this file just
+       says var(--accent) or var(--bg) and points back here.
+       That's the payoff of Pass 1: swapping the entire site's
+       look is a ~8-line edit, not a hunt through 300 lines. */
+  --bg: #fefbfc;            /* near-white with a faint warm/pink undertone, softer than pure #fff */
+  --bg-card: #ffffff;       /* true white — cards sit slightly brighter than the page itself */
+  --border: #f0d9e0;        /* soft pink-grey — subtle borders that echo the accent instead of neutral grey */
+  --text: #24141a;          /* near-black with a warm undertone — pairs better with pink than cold black does */
+  --text-dim: #7a6167;      /* muted mauve-grey — secondary text, labels, captions */
+  --accent: #e8447a;        /* the pink accent — links, buttons, highlights, headings */
+  --accent-dim: #fdeaf1;    /* pale pink tint — subtle background fills behind accent elements */
+  --on-accent: #ffffff;     /* text color for anything SITTING ON an accent-colored fill, e.g. button labels */
+  --warn: #d97706;          /* amber/orange — still reads as "pending" against a light background */
+
+  /* --- Spacing scale ---
+       Instead of picking random pixel values everywhere, we
+       define a consistent scale and reuse it. This is why
+       professionally-built sites feel "evenly spaced" — the
+       gaps are never arbitrary. */
+  --space-sm: 0.75rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: 6rem;
+
+  /* --- Shape --- */
+  --radius: 10px;          /* corner rounding, reused on cards/buttons */
+}
+
+/* ------------------------------------------------------------
+   THE UNIVERSAL RESET
+   ------------------------------------------------------------
+   The * selector means "every single element." Browsers ship
+   with inconsistent default spacing (margins/padding) baked
+   into tags like <h1>, <p>, <ul>. This wipes all of that to
+   zero so WE control spacing on purpose, instead of fighting
+   invisible browser defaults later.
+
+   box-sizing: border-box changes how width is calculated: with
+   it, an element's padding and border are INCLUDED in its
+   stated width, instead of added on top. Without this, adding
+   padding to something can silently make it overflow its
+   container. Nearly every real-world CSS file sets this.
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   BASE PAGE STYLES
+   ------------------------------------------------------------
+   Styles here apply to <body> and, through inheritance, to
+   most text on the page (children inherit font/color from
+   their parent unless told otherwise).
+*/
+body {
+  background-color: var(--bg);
+  color: var(--text);
+
+  /* font-family is a FALLBACK LIST, read left to right. The
+     browser uses the first one it has installed. -apple-system
+     and Segoe UI are the native fonts on Mac and Windows —
+     using them means your site's text looks exactly like the
+     operating system's own text, which loads instantly with
+     zero extra download. sans-serif at the end is a last-resort
+     generic fallback that always exists. */
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  /* line-height is the vertical space a line of text takes up,
+     as a multiple of the font size. 1.6 means noticeably more
+     breathing room than the browser default (~1.2) — dense text
+     is tiring to read, especially in paragraphs. */
+}
+
+/* Headings share some base rules; sizes come in Pass 2. */
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.2;      /* headings want TIGHTER lines than paragraphs */
+  color: var(--text);
+}
+
+p {
+  color: var(--text-dim);
+  max-width: 65ch;
+  /* "ch" is a unit meaning "the width of one character." Capping
+     paragraph width at 65ch keeps line lengths readable — lines
+     of text that stretch the full width of a wide screen are
+     genuinely harder to read, your eye loses track jumping back
+     to the start of the next line. */
+}
+
+/* Links: remove the default underline and blue color, we'll
+   style them deliberately per-context in later passes. */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;   /* an image can never be wider than its container — prevents layout breakage */
+  display: block;    /* images are inline by default, which adds a few mysterious px of gap beneath them; block removes that */
+}
+
+/* ============================================================
+   PASS 2: LAYOUT
+   ============================================================
+   This pass positions things: the sticky nav bar, the two-column
+   hero, and consistent spacing between page sections. This is
+   where the page stops looking like a plain document and starts
+   looking like an actual website.
+*/
+
+/* ------------------------------------------------------------
+   NAV BAR
+   ------------------------------------------------------------
+   position: sticky + top: 0 means: this element scrolls normally
+   with the page UNTIL it would scroll off the top of the screen,
+   then it "sticks" there and stays visible while everything else
+   keeps scrolling underneath it. That's how the nav stays pinned
+   as you scroll down the page.
+
+   z-index controls stacking order when elements overlap — higher
+   numbers sit on top. Without it, content scrolling up from below
+   could render OVER the nav bar instead of under it.
+*/
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+nav {
+  display: flex;
+  /* flex (short for "flexbox") is a layout mode: it arranges an
+     element's direct children in a row (by default) and gives you
+     easy tools to control spacing and alignment between them.
+     Before flexbox, doing this required much clunkier CSS. It is
+     THE workhorse layout tool of modern web design — you'll see
+     it everywhere from here on. */
+  align-items: center;        /* centers items vertically within the row */
+  justify-content: space-between;
+  /* space-between pushes the first item to the far left and the
+     last item to the far right, distributing any extra space
+     evenly between them. This is what puts your logo on the left
+     and separates the nav links to the right. */
+  padding: var(--space-md) var(--space-lg);
+  /* two values = (top/bottom) (left/right) */
+  max-width: 1200px;
+  /* stops the nav content from stretching edge-to-edge on a huge
+     monitor — same reasoning as the 65ch limit on paragraphs */
+  margin: 0 auto;
+  /* auto margins on left/right CENTER a block element that has a
+     max-width. This is the single most common centering trick
+     in CSS. */
+}
+
+nav a {
+  color: var(--text);
+  margin-left: var(--space-md);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.15s ease;
+  /* transition makes property CHANGES animate smoothly instead of
+     snapping instantly. Here: if color changes (e.g. on hover),
+     it fades over 0.15 seconds instead of flipping abruptly. */
+}
+
+nav a:hover {
+  color: var(--accent);
+  /* :hover is a PSEUDO-CLASS — a state selector. This rule only
+     applies while the mouse is actually over the link. */
+}
+
+/* The first nav link (your initials/logo) should stand out from
+   the rest — bigger, and it shouldn't shift right with the others. */
+nav a:first-child {
+  margin-left: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------
+   PAGE-WIDE SECTION RULES
+   ------------------------------------------------------------
+   Every <section> (hero, experience, projects, games, contact)
+   gets the same horizontal centering and generous vertical
+   breathing room, so the page feels consistent as you scroll.
+*/
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: var(--space-lg);
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------
+   HERO
+   ------------------------------------------------------------
+   The reference site's hero is two columns: text on the left,
+   a card on the right. We don't have that side card yet (that's
+   a later addition), but we set up the structure now so adding
+   it later is a small change, not a rebuild.
+*/
+#hero {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+#hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+#hero > p:first-of-type {
+  /* the tagline — first paragraph right after the h1 */
+  color: var(--accent);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+}
+
+#hero > p:nth-of-type(2) {
+  /* the bio paragraph */
+  margin-bottom: var(--space-lg);
+}
+
+/* ------------------------------------------------------------
+   BUTTON-STYLE LINKS
+   ------------------------------------------------------------
+   Right now EVERY <a> tag looks the same (plain green text).
+   That's wrong for the LinkedIn link and the project/game links —
+   those should look like clickable BUTTONS, not inline text
+   links. We target them by where they are: a direct child <a>
+   of #hero, or of a project/game article.
+*/
+#hero > a,
+article > a {
+  display: inline-block;
+  /* inline-block lets an <a> (normally an inline element that
+     ignores width/height/padding oddly) behave like a box you
+     can pad and size, while still sitting inline with text
+     around it rather than forcing its own full-width line. */
+  background-color: var(--accent);
+  color: var(--on-accent);
+  /* white text on the pink button fill — this is deliberately its
+     OWN variable (not var(--bg)) because a button's text color
+     should depend on the button's own fill, not on whatever the
+     page background happens to be. Tying them together earlier
+     was a mistake that only broke once the theme changed. */
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  margin-top: var(--space-sm);
+  transition: opacity 0.15s ease;
+}
+
+#hero > a:hover,
+article > a:hover {
+  opacity: 0.85;
+  /* a simple, cheap hover effect: slightly fade the button so it
+     visibly reacts to the mouse without needing a color swap */
+}
+
+/* ============================================================
+   PASS 3: CARDS
+   ============================================================
+   Every repeated chunk of content on this site — your experience
+   entry, the robot, Motivez, and the two game placeholders — is
+   an <article> tag in the HTML. This pass turns each <article>
+   into a bordered "card," and arranges each section's cards into
+   a responsive grid instead of one long stacked column.
+*/
+
+/* ------------------------------------------------------------
+   THE GRID
+   ------------------------------------------------------------
+   grid (short for CSS Grid) is the OTHER major layout mode,
+   alongside flexbox. Where flexbox is great at arranging items
+   in a single row or column, grid is built for two-dimensional
+   layouts — rows AND columns at once. A card gallery is exactly
+   that use case.
+*/
+#experience,
+#projects,
+#games {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* This line is doing a lot, so slowly:
+       - repeat(...) means "keep making columns using this rule
+         until you run out of row space."
+       - minmax(280px, 1fr) means each column is AT LEAST 280px
+         wide, but grows to share space equally (1fr = "1 fraction
+         of the available space") if there's room.
+       - auto-fit tells the browser to figure out on its own how
+         many columns fit at the current screen width.
+     The payoff: on a wide desktop screen you might get 3 columns
+     side by side; on a narrow phone screen, it automatically
+     drops to a single column — with NO separate mobile code
+     required. This one line is doing the job that used to take
+     a dozen lines of manual "if the screen is this wide, do this"
+     rules. */
+  gap: var(--space-md);
+  /* gap is the space BETWEEN grid items, both row and column gaps
+     at once — much simpler than the old technique of adding
+     margins to each item individually. */
+}
+
+/* The h2 title ("Experience", "Projects", "Games") needs to span
+   the FULL width of the grid, sitting above all the columns,
+   rather than becoming its own little grid cell squeezed next to
+   a card. grid-column: 1 / -1 means "start at column line 1, end
+   at the LAST column line" — i.e., stretch across everything. */
+#experience h2,
+#projects h2,
+#games h2 {
+  grid-column: 1 / -1;
+}
+
+/* ------------------------------------------------------------
+   THE CARD ITSELF
+   ------------------------------------------------------------
+*/
+article {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  /* flex-direction: column makes flexbox stack children TOP TO
+     BOTTOM instead of its default left-to-right row. Combined
+     with the next rule, this is what keeps the "View project" /
+     "Visit Motivez" button pinned to the bottom of every card,
+     even when one card's description text is longer than
+     another's. */
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+/* Card hover (lift + brighten border) used to live here as
+   article:hover. In Pass 5, cards got wrapped in a <a
+   class="card-link"> to make the whole card clickable — so the
+   hover trigger moved to ".card-link:hover article" further down
+   this file instead. The "coming-soon" placeholder cards aren't
+   wrapped in a link at all (nothing to click yet), so their own
+   hover override lives further down too, next to the rest of
+   their styling. */
+
+article img {
+  border-radius: calc(var(--radius) - 2px);
+  margin-bottom: var(--space-md);
+  aspect-ratio: 16 / 10;
+  /* aspect-ratio forces a consistent width-to-height RATIO no
+     matter the image's original dimensions or the card's width.
+     Without this, your robot photo (tall, portrait) and the
+     Motivez logo (wide, landscape) would make their cards
+     different heights and the grid would look ragged. */
+  object-fit: cover;
+  /* object-fit: cover crops the image to fill that aspect-ratio
+     box completely, rather than squashing or stretching it out
+     of shape. Some of the image's edges get cropped off — that's
+     the trade-off for every card having a uniform image size. */
+}
+
+article h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+article p {
+  margin-bottom: var(--space-md);
+  flex-grow: 1;
+  /* flex-grow: 1 tells this paragraph to expand and fill any
+     leftover vertical space in the card. Combined with the
+     column layout above, this is the trick that pushes the
+     button down to the same bottom edge on every card in a row,
+     regardless of how much description text each one has. */
+}
+
+/* ------------------------------------------------------------
+   "COMING SOON" CARDS
+   ------------------------------------------------------------
+   Remember the class="coming-soon" we added to the two game
+   placeholders back in the HTML step? This is where it finally
+   does something. A CLASS selector in CSS starts with a dot.
+*/
+.coming-soon {
+  opacity: 0.5;
+  border-style: dashed;
+  /* a dashed border (instead of the normal solid line) is a
+     common visual convention for "this isn't finished/real yet" —
+     you'll recognize it from wireframes and mockup tools. */
+}
+
+.coming-soon:hover {
+  /* Override the normal card-hover lift for these two — nothing
+     to click here yet, so nothing should look clickable. */
+  transform: none;
+  border-color: var(--border);
+}
+
+.coming-soon h3::after {
+  /* ::after inserts generated content right after the element's
+     own content, without needing an extra tag in the HTML. We
+     use it here to append a small "Coming Soon" badge next to
+     the game's title. */
+  content: "COMING SOON";
+  display: inline-block;
+  margin-left: var(--space-sm);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--warn);
+  background-color: rgba(217, 119, 6, 0.12);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   PASS 4: RESPONSIVENESS & POLISH
+   ============================================================
+   Everything so far has been designed and eyeballed on a wide
+   desktop screen. This pass makes sure the site still works on
+   a phone, and cleans up a few small rough edges.
+*/
+
+/* ------------------------------------------------------------
+   THE MEDIA QUERY
+   ------------------------------------------------------------
+   A media query is a CSS rule that only applies when a condition
+   about the screen/window is true — here, "max-width: 640px"
+   means "only apply the rules inside these curly braces when the
+   browser window is 640 pixels wide or narrower," which is
+   roughly phone-sized. Anything outside this block keeps applying
+   everywhere, all the time — a media query doesn't turn other
+   styles off, it just ADDS more rules on top for small screens.
+
+   640px is a common "phone breakpoint" — wide enough to include
+   almost every phone in portrait orientation, narrow enough that
+   tablets and small laptops don't accidentally get squeezed into
+   the phone layout too.
+*/
+@media (max-width: 640px) {
+
+  /* The grid already collapses to one column automatically
+     (thanks to auto-fit from Pass 3) — that part needs no extra
+     code at all. But a few things still need explicit adjustment
+     for a small screen: */
+
+  #hero h1 {
+    font-size: 2.25rem;
+    /* 3.5rem was sized for a wide screen; at that size on a phone
+       "Kinan Al Hariri" would likely wrap awkwardly or run close
+       to the screen edges. */
+  }
+
+  section {
+    padding: var(--space-lg) var(--space-md);
+    /* less horizontal AND vertical padding than the desktop
+       var(--space-xl)/var(--space-lg) — generous whitespace looks
+       intentional on a big screen, but eats precious width on a
+       phone and pushes content below the fold. */
+  }
+
+  nav {
+    padding: var(--space-sm) var(--space-md);
+    flex-wrap: wrap;
+    /* flex-wrap: wrap lets nav items drop to a second line
+       instead of squeezing (or overflowing) onto one row when
+       there isn't enough horizontal space for "KA · Experience ·
+       Projects · Games · Contact" side by side. */
+    row-gap: var(--space-sm);
+  }
+
+  nav a {
+    margin-left: var(--space-sm);
+    font-size: 0.85rem;
+  }
+}
+
+/* ------------------------------------------------------------
+   SMOOTH ANCHOR SCROLLING
+   ------------------------------------------------------------
+   Remember the nav links from way back in Pass-0 HTML — the
+   href="#projects" style links that jump down the page? By
+   default, that jump is INSTANT, a hard cut. This one line makes
+   the browser glide there instead. It's one line of CSS doing a
+   job that used to require JavaScript.
+*/
+html {
+  scroll-behavior: smooth;
+}
+
+/* ------------------------------------------------------------
+   ACCOUNTING FOR THE STICKY NAV
+   ------------------------------------------------------------
+   Because the nav bar is position: sticky and stays pinned to
+   the top of the screen (Pass 2), clicking a nav link can scroll
+   a section's heading PARTWAY underneath it — the sticky nav
+   physically overlaps the top of whatever you just jumped to.
+   scroll-margin-top reserves invisible space above each target
+   so the browser stops short, leaving room for the nav bar.
+*/
+section {
+  scroll-margin-top: 80px;
+}
+
+/* ============================================================
+   PASS 5: CLICKABLE CARDS & DETAIL PAGES
+   ============================================================
+   Two things happened in the HTML that need new CSS to make
+   sense of them: (1) every card's <article> is now wrapped in an
+   <a class="card-link">, so the WHOLE card is clickable, and
+   (2) three new pages exist in pages/ that need their own layout
+   — a single-column "article" style, since a detail page is read
+   top to bottom rather than browsed like a grid.
+*/
+
+/* ------------------------------------------------------------
+   MAKING THE WHOLE CARD CLICKABLE
+   ------------------------------------------------------------
+   By default, an <a> is an "inline" element — it only takes up
+   as much width as its text/content needs, sitting in the middle
+   of a line. Wrapping a whole <article> in one breaks that
+   assumption, so we explicitly tell the browser to treat this
+   link as a full block instead.
+*/
+.card-link {
+  display: block;
+  color: inherit;
+  /* color: inherit stops the <a> from forcing all the text
+     inside it to turn accent-pink (the default link color from
+     Pass 1). The card's own inner elements (h3, p) already have
+     their own colors defined — inherit lets those win instead. */
+}
+
+/* Because .card-link is now the thing being hovered (not the
+   <article> directly), we move the hover-lift effect here. The
+   article itself no longer needs its own :hover rule. */
+.card-link:hover article {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+/* Small label above a card's title, e.g. "VEX Robotics" or
+   "Co-op Placement" — sets context before the visitor even
+   reads the heading. */
+.card-eyebrow {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+/* The "Read more →" hint at the bottom of every teaser card. */
+.card-more {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: auto;
+  /* margin-top: auto, inside a column flexbox (remember article
+     is display:flex; flex-direction:column from Pass 3), pushes
+     this element all the way down to the bottom of the card —
+     same trick as the flex-grow paragraph, different technique. */
+}
+
+/* ------------------------------------------------------------
+   DETAIL PAGES
+   ------------------------------------------------------------
+   The layout for experience.html, robot.html, and motivez.html.
+   Narrower than the homepage's grid sections, because long-form
+   reading is more comfortable in a constrained column — the same
+   65ch reasoning from Pass 1's paragraph rule, just applied to
+   the whole page.
+*/
+.detail-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-lg);
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.detail-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.detail-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-md);
+}
+
+/* A row of small pill-shaped tags, e.g. "Swift", "Xcode",
+   "Swerve Drive" — quick-scan keywords before the visitor reads
+   a word of prose. */
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.tag {
+  background-color: var(--accent-dim);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  /* border-radius: 999px on a short element rounds it into a
+     full pill/capsule shape — the radius is larger than the
+     element could ever need, so it just maxes out. */
+}
+
+.detail-gallery {
+  margin-bottom: var(--space-lg);
+}
+
+.detail-gallery img {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.detail-block {
+  margin-bottom: var(--space-lg);
+  padding: 0;
+  /* override the generic `section { padding: ... }` rule from
+     Pass 2 — these blocks live INSIDE .detail-page, which already
+     has its own padding, so they don't need their own too. */
+}
+
+.detail-block h2 {
+  font-size: 1.4rem;
+  margin-bottom: var(--space-sm);
+  color: var(--text);
+  /* Deliberately NOT var(--accent) here — the big pink section
+     titles ("Projects", "Games") on the homepage are a different
+     visual weight than an in-article subheading like "Overview"
+     or "What I Did". Keeping this one neutral keeps the page
+     from feeling like it's shouting every few lines. */
+}
+
+.detail-list {
+  list-style: none;
+  /* list-style: none removes the browser's default bullet
+     points — we're about to draw our own with ::before instead,
+     giving more control over their look. */
+}
+
+.detail-list li {
+  position: relative;
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-sm);
+  color: var(--text-dim);
+}
+
+.detail-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  /* A small pink dot, positioned absolutely at the left edge of
+     each list item, standing in for a bullet point — matches the
+     site's accent color instead of the browser's plain black dot. */
+}
+
+.detail-cta {
+  display: inline-block;
+  background-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius);
+  transition: opacity 0.15s ease;
+}
+
+.detail-cta:hover {
+  opacity: 0.85;
+}

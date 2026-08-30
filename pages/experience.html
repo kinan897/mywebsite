@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  pages/experience.html — a DETAIL PAGE
+  ============================================================
+  This is the first file in a new "pages" subfolder. Everything
+  about this file works the same way index.html does — it's just
+  a second, separate HTML document. The one new wrinkle is PATHS:
+  because this file lives one folder DEEPER than index.html
+  (inside pages/, not next to it), every link back out has to
+  say "../" first, which means "go up one folder, then look."
+
+    ../style.css     → go up out of pages/, then into style.css
+    ../images/x.jpg  → go up out of pages/, then into images/
+    ../index.html    → go up out of pages/, to index.html
+
+  Forget the ../ and the browser will look for these files
+  INSIDE pages/, where they don't exist, and everything breaks
+  silently (no image, no styling, dead link). This is the most
+  common beginner mistake with multi-page sites — now you know
+  what it looks like when it happens.
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience — Kinan Al Hariri</title>
+  <meta name="description" content="Kinan Al Hariri's co-op experience as a Mobile App Developer at CEC Career Education Council.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="../index.html#top">KA</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#games">Games</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- detail-page is a NEW class, not used on index.html. We'll
+       give it its own styling — a narrower single-column layout,
+       since a detail page is meant to be read top to bottom like
+       an article, not browsed like a grid of cards. -->
+  <main class="detail-page">
+
+    <!-- A "back" link is standard on any detail page — never
+         strand a visitor with no way back except the browser's
+         back button. -->
+    <a href="../index.html#experience" class="back-link">&larr; Back to Experience</a>
+
+    <!-- eyebrow = the small label ABOVE the big heading, e.g.
+         "CO-OP · 2026". This is a span, not a heading, because
+         it's a decorative label, not real document structure. -->
+    <p class="eyebrow">Co-op Placement</p>
+    <h1>Mobile App Developer</h1>
+    <p class="detail-subtitle">CEC Career Education Council</p>
+
+    <div class="detail-tags">
+      <span class="tag">Swift</span>
+      <span class="tag">Xcode</span>
+      <span class="tag">iOS Development</span>
+      <span class="tag">UI/UX Collaboration</span>
+    </div>
+
+    <section class="detail-block">
+      <h2>Overview</h2>
+      <p>
+        As an aspiring app developer with a keen interest in engineering
+        and computer science, I gained hands-on experience at CEC Career
+        Education Council. Through this co-op placement, I learned to
+        develop mobile applications using Swift and Xcode — two of the
+        most powerful tools in the app development industry. The
+        experience deepened my understanding of the full app development
+        lifecycle and gave me skills I plan to carry into my future
+        career.
+      </p>
+    </section>
+
+    <section class="detail-block">
+      <h2>What I Did</h2>
+      <ul class="detail-list">
+        <li>
+          Attended daily meetings at 9:30 AM and 12:30 PM to discuss
+          project progress and development strategy alongside the team.
+        </li>
+        <li>
+          Learned to build mobile applications using Swift in Xcode,
+          from first principles through practical, working features.
+        </li>
+        <li>
+          Gained hands-on experience implementing app features, debugging
+          issues, and refining functionality based on testing and
+          feedback.
+        </li>
+        <li>
+          Collaborated with team members to design and improve app
+          interfaces, keeping the end-to-end user experience smooth and
+          consistent.
+        </li>
+      </ul>
+    </section>
+
+    <section class="detail-block">
+      <h2>What I Took Away</h2>
+      <p>
+        This placement built both technical skill and a strong work
+        ethic — the two things that matter most in the fast-paced world
+        of app development. It gave me a real, ground-level view of how
+        an app actually gets built, not just how to write code in
+        isolation. I'm looking to keep growing in this field, with the
+        goal of making a lasting impact in tech.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Kinan Al Hariri</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+
+</html>
