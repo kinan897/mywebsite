@@ -15,6 +15,7 @@
   <header>
     <nav>
       <a href="#top">KA</a>
+      <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#games">Games</a>
@@ -24,8 +25,13 @@
 
   <main id="top">
 
-    <!-- Hero -->
+    <!-- Hero: blueprint-style corner brackets + grid are pure decoration (aria-hidden) -->
     <section id="hero">
+      <span class="blueprint-corner corner-tl" aria-hidden="true"></span>
+      <span class="blueprint-corner corner-tr" aria-hidden="true"></span>
+      <span class="blueprint-corner corner-bl" aria-hidden="true"></span>
+      <span class="blueprint-corner corner-br" aria-hidden="true"></span>
+
       <h1>Kinan Al Hariri</h1>
       <p>Aspiring Engineer · CS Student</p>
 
@@ -44,28 +50,132 @@
       </a>
     </section>
 
-    <!-- Experience: teaser card, links to pages/experience.html -->
-    <section id="experience">
-      <h2>Experience</h2>
+    <!-- Skills + Experience share one row so neither leaves empty
+         space beside a single card. -->
+    <section class="split-row reveal">
 
-      <a href="pages/experience.html" class="card-link">
-        <article>
-          <p class="card-eyebrow">Co-op Placement</p>
-          <h3>Mobile App Developer</h3>
-          <p>CEC Career Education Council &middot; Swift &amp; Xcode</p>
-          <span class="card-more">Read more &rarr;</span>
-        </article>
-      </a>
+      <div id="skills" class="split-col">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-tile" style="--tile-color:#3776AB">
+            <span class="skill-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <path d="M16 4c-6 0-6 3-6 3v3h6v1H7s-4 0-4 6 4 6 4 6h3v-4c0-3 3-5 6-5h5c2 0 4-2 4-4V8s0-4-9-4z" fill="#3776AB"/>
+                <path d="M16 28c6 0 6-3 6-3v-3h-6v-1h9s4 0 4-6-4-6-4-6h-3v4c0 3-3 5-6 5h-5c-2 0-4 2-4 4v3s0 4 9 4z" fill="#FFD43B"/>
+              </svg>
+            </span>
+            <span class="skill-name">Python</span>
+          </div>
+          <div class="skill-tile" style="--tile-color:#F0B90B">
+            <span class="skill-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <rect x="3" y="7" width="26" height="18" rx="3" fill="#F0DB4F"/>
+                <text x="16" y="20" font-size="10" font-weight="700" text-anchor="middle" fill="#111">JS</text>
+              </svg>
+            </span>
+            <span class="skill-name">JavaScript</span>
+          </div>
+          <div class="skill-tile" style="--tile-color:#5382A1">
+            <span class="skill-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <path d="M10 18h12v4a6 6 0 0 1-6 6 6 6 0 0 1-6-6v-4z" fill="#5382A1"/>
+                <path d="M22 19h2a3 3 0 0 1 0 6h-2" fill="none" stroke="#5382A1" stroke-width="2"/>
+                <path d="M13 4c-1 2 2 2 1 4M18 4c-1 2 2 2 1 4" stroke="#5382A1" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="skill-name">Java</span>
+          </div>
+          <div class="skill-tile" style="--tile-color:#F05138">
+            <span class="skill-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <path d="M4 22c8 4 18 3 22-4-3 1-6 1-9 0 5-2 8-6 8-11-3 3-7 5-11 5 3-3 4-7 3-10-4 5-10 8-16 8 2 3 5 5 8 6-4 3-8 4-13 4 3 3 6 5 8 6z" fill="#F05138"/>
+              </svg>
+            </span>
+            <span class="skill-name">Swift</span>
+          </div>
+          <div class="skill-tile" style="--tile-color:#149ECA">
+            <span class="skill-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <circle cx="16" cy="16" r="2.6" fill="#149ECA"/>
+                <g fill="none" stroke="#149ECA" stroke-width="1.5">
+                  <ellipse cx="16" cy="16" rx="12" ry="4.6"/>
+                  <ellipse cx="16" cy="16" rx="12" ry="4.6" transform="rotate(60 16 16)"/>
+                  <ellipse cx="16" cy="16" rx="12" ry="4.6" transform="rotate(120 16 16)"/>
+                </g>
+              </svg>
+            </span>
+            <span class="skill-name">React Native</span>
+          </div>
+          <div class="skill-tile" style="--tile-color:#E34F26">
+            <span class="skill-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <path d="M6 4h20l-2 21-8 3-8-3z" fill="#E34F26"/>
+                <path d="M11 11h10l-1 9-4 1.3-4-1.3-.3-3h2.5l.1 1.3L16 19l1.7-.6.2-2.4H11.4l-.4-5z" fill="#fff"/>
+              </svg>
+            </span>
+            <span class="skill-name">HTML &amp; CSS</span>
+          </div>
+          <div class="skill-tile" style="--tile-color:#478CBF">
+            <span class="skill-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32">
+                <rect x="14" y="4" width="4" height="6" rx="2" fill="#478CBF"/>
+                <rect x="6" y="10" width="20" height="16" rx="8" fill="#478CBF"/>
+                <circle cx="13" cy="18" r="2.5" fill="#fff"/>
+                <circle cx="19" cy="18" r="2.5" fill="#fff"/>
+              </svg>
+            </span>
+            <span class="skill-name">GDScript</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="experience" class="split-col">
+        <h2>Experience</h2>
+
+        <a href="pages/experience.html" class="card-link">
+          <article>
+            <p class="card-eyebrow">
+              <span class="icon-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="8" width="18" height="12" rx="2"/>
+                  <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                  <line x1="3" y1="13" x2="21" y2="13"/>
+                </svg>
+              </span>
+              Co-op Placement
+            </p>
+            <h3>Mobile App Developer</h3>
+            <p>CEC Career Education Council &middot; Swift &amp; Xcode</p>
+            <span class="card-more">Read more &rarr;</span>
+          </article>
+        </a>
+      </div>
+
     </section>
 
     <!-- Projects: teaser cards, each links to its own detail page -->
-    <section id="projects">
+    <section id="projects" class="reveal">
       <h2>Projects</h2>
 
       <a href="pages/robot.html" class="card-link">
         <article>
           <img src="images/robot.jpg" alt="VEX competition robot with a swerve-drive base and chain-driven ball intake, held next to a Catholic Skills medal">
-          <p class="card-eyebrow">VEX Robotics</p>
+          <p class="card-eyebrow">
+            <span class="icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="7" y="7" width="10" height="10" rx="1"/>
+                <line x1="7" y1="10" x2="3" y2="10"/>
+                <line x1="7" y1="14" x2="3" y2="14"/>
+                <line x1="17" y1="10" x2="21" y2="10"/>
+                <line x1="17" y1="14" x2="21" y2="14"/>
+                <line x1="10" y1="7" x2="10" y2="3"/>
+                <line x1="14" y1="7" x2="14" y2="3"/>
+                <line x1="10" y1="17" x2="10" y2="21"/>
+                <line x1="14" y1="17" x2="14" y2="21"/>
+              </svg>
+            </span>
+            VEX Robotics
+          </p>
           <h3>Competition Ball-Intake Robot</h3>
           <p>Swerve-drive base &middot; chain-driven intake &middot; medal winner</p>
           <span class="card-more">Read more &rarr;</span>
@@ -75,36 +185,109 @@
       <a href="pages/motivez.html" class="card-link">
         <article>
           <img src="images/motivez.png" alt="Motivez logo">
-          <p class="card-eyebrow">Team Project</p>
+          <p class="card-eyebrow">
+            <span class="icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 5h16v10H9l-4 4v-4H4z"/>
+              </svg>
+            </span>
+            Team Project
+          </p>
           <h3>Motivez</h3>
           <p>Social discovery app &middot; React Native &amp; Supabase</p>
           <span class="card-more">Read more &rarr;</span>
         </article>
       </a>
 
+      <a href="https://github.com/kinan897" target="_blank" rel="noopener" class="card-link">
+        <article>
+          <p class="card-eyebrow">
+            <span class="icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6a2 2 0 0 1 2-2h6l2 2h4a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>
+                <circle cx="12" cy="13" r="2.6"/>
+              </svg>
+            </span>
+            GitHub
+          </p>
+          <h3>More on GitHub</h3>
+          <p>Browse the rest of my repos, including the source for this site.</p>
+          <span class="card-more">Visit profile &rarr;</span>
+        </article>
+      </a>
+
       <!-- Copy an entire <a class="card-link">...</a> block to add another project. -->
     </section>
 
-    <!-- Games -->
-    <section id="games">
+    <!-- Games: retro/pixel accents (.pixel-frame on the card, dot-grid behind the section) -->
+    <section id="games" class="reveal">
       <h2>Games</h2>
 
       <a href="pages/fish-out-of-water.html" class="card-link">
-        <article>
-          <p class="card-eyebrow">Godot &middot; GDScript</p>
+        <article class="pixel-frame">
+          <p class="card-eyebrow">
+            <span class="icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <rect x="9" y="2" width="6" height="6"/>
+                <rect x="9" y="16" width="6" height="6"/>
+                <rect x="2" y="9" width="6" height="6"/>
+                <rect x="16" y="9" width="6" height="6"/>
+                <rect x="9" y="9" width="6" height="6"/>
+              </svg>
+            </span>
+            Godot &middot; GDScript
+          </p>
           <h3>Fish Out of Water</h3>
           <p>2D action game &middot; Windows download</p>
           <span class="card-more">Read more &rarr;</span>
         </article>
       </a>
+
+      <!-- Static info panel, not a link — reuses the same pixel-frame look as the game card -->
+      <div class="game-facts pixel-frame">
+        <p class="card-eyebrow">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="4" width="12" height="16" rx="2"/>
+              <path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/>
+              <line x1="9" y1="10" x2="15" y2="10"/>
+              <line x1="9" y1="14" x2="15" y2="14"/>
+            </svg>
+          </span>
+          Quick Facts
+        </p>
+        <ul class="fact-list">
+          <li><span>Engine</span><strong>Godot 4</strong></li>
+          <li><span>Language</span><strong>GDScript</strong></li>
+          <li><span>Genre</span><strong>2D Platformer</strong></li>
+          <li><span>Abilities</span><strong>Jump &middot; Dash &middot; Wall Jump</strong></li>
+        </ul>
+      </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact">
+    <section id="contact" class="reveal">
       <h2>Get in touch</h2>
       <p>Open to co-op roles, collaborations, and anything at the intersection of hardware and software.</p>
-      <a href="mailto:kinanalhariri88@gmail.com">kinanalhariri88@gmail.com</a>
-      <a href="https://www.linkedin.com/in/kinan-alhariri-09b240375/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:kinanalhariri88@gmail.com">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </span>
+        kinanalhariri88@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/kinan-alhariri-09b240375/" target="_blank" rel="noopener">
+        <span class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 4h6v6"/>
+            <path d="M20 4L10 14"/>
+            <path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/>
+          </svg>
+        </span>
+        LinkedIn
+      </a>
     </section>
 
   </main>

@@ -158,18 +158,81 @@ article > a:hover {
 /* ============================================================
    CARD GRID (Experience / Projects / Games)
    ============================================================ */
-#experience,
-#projects,
-#games {
+#projects {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-md);
 }
 
-#experience h2,
-#projects h2,
-#games h2 {
+#projects h2 {
   grid-column: 1 / -1;   /* section heading spans the full grid width */
+}
+
+/* Skills and Experience share a row instead of each being a full-width
+   section — keeps a single Experience card from leaving a big empty
+   gap beside it, the same problem Games had with only one card. */
+.split-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+
+.split-col {
+  flex: 1 1 320px;
+  scroll-margin-top: 80px;   /* these are <div>s now, not <section>s, so they need their own nav-offset rule */
+}
+
+/* Games uses flex instead of the shared grid above — with only one
+   card right now, a grid track would leave an odd empty gap beside
+   it. flex-wrap lets it size to its own content and still wrap
+   cleanly whenever a second game is added later. */
+#games {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+#games h2 {
+  flex-basis: 100%;
+}
+
+#games .card-link,
+.game-facts {
+  flex: 0 1 380px;
+}
+
+/* the static "Quick Facts" panel beside the game card */
+.game-facts {
+  background-color: var(--bg-card);
+  padding: var(--space-md);
+}
+
+.fact-list {
+  list-style: none;
+}
+
+.fact-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm);
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 0.9rem;
+}
+
+.fact-list li:last-child {
+  border-bottom: none;
+}
+
+.fact-list li span {
+  color: var(--text-dim);
+}
+
+.fact-list li strong {
+  color: var(--text);
+  text-align: right;
 }
 
 /* individual card */
@@ -368,4 +431,231 @@ html {
 
 .detail-cta:hover {
   opacity: 0.85;
+}
+
+/* ============================================================
+   SKILLS — small monogram tiles, colored by each language's usual
+   brand color (a stand-in for logos, rather than reproducing them)
+   ============================================================ */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: var(--space-sm);
+}
+
+.skill-tile {
+  --tile-color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-md) var(--space-sm);
+  text-align: center;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.skill-tile:hover {
+  transform: translateY(-4px);
+  border-color: var(--tile-color);
+}
+
+.skill-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.skill-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.skill-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+/* ============================================================
+   ICONS — small SVG badges next to card eyebrows and contact links
+   ============================================================ */
+.card-eyebrow {
+  display: flex;
+  align-items: center;
+}
+
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-right: var(--space-sm);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.icon-badge svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.2s ease;
+}
+
+/* a small hover reaction on the icon, matching the card lift */
+.card-link:hover .icon-badge svg {
+  transform: scale(1.15) rotate(-6deg);
+}
+
+.contact-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  color: var(--accent);
+}
+
+/* eyebrow icons on detail pages (experience.html, robot.html, etc.) */
+.eyebrow {
+  display: flex;
+  align-items: center;
+}
+
+.eyebrow .icon-badge {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================================
+   BLUEPRINT DECORATION — hero section
+   ============================================================ */
+#hero {
+  position: relative;
+  overflow: hidden;
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* keeps the real hero content above the decorative grid */
+#hero > *:not(.blueprint-corner) {
+  position: relative;
+  z-index: 1;
+}
+
+.blueprint-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.corner-tl { top: 8px; left: 0; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.corner-tr { top: 8px; right: 0; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+.corner-bl { bottom: 8px; left: 0; border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.corner-br { bottom: 8px; right: 0; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+
+/* ============================================================
+   RETRO / PIXEL FRAME — Games section
+   ============================================================ */
+#games {
+  position: relative;
+}
+
+/* a faint dot grid behind the games card, like graph/pixel paper */
+#games::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--border) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#games > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* sharp corners + a solid offset shadow instead of a blurred one —
+   the classic flat "pixel button" look, no rounded corners. */
+.pixel-frame {
+  border: 3px solid var(--text) !important;
+  border-radius: 0 !important;
+  box-shadow: 5px 5px 0 0 var(--accent);
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+/* overrides the generic .card-link:hover article lift — this one
+   nudges diagonally instead of floating straight up, and pushes the
+   offset shadow out further instead of changing border color. */
+.card-link:hover .pixel-frame {
+  transform: translate(-3px, -3px);
+  border-color: var(--text);
+  box-shadow: 8px 8px 0 0 var(--accent);
+}
+
+/* same dot-grid treatment, reused on the Fish Out of Water detail page */
+.pixel-page {
+  position: relative;
+}
+
+.pixel-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--border) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pixel-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   SCROLL-REVEAL MOTION
+   ============================================================
+   Paired with script.js: .reveal starts hidden/offset, and JS adds
+   .in-view the first time an element scrolls into the viewport.
+*/
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
