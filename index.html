@@ -1,35 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
   <title>Kinan Al Hariri — Aspiring Engineer & CS Student </title>
-
   <meta name="description" content="Portfolio of Kinan Al Hariri — aspiring engineer and CS student. Robotics, app development, and game projects.">
-
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <!--
-    <body> is everything a visitor actually SEES.
-  -->
 
-  <!-- ========================================================
-       NAVIGATION — the menu bar at the top
-       ========================================================
-       Links starting with # are "anchor links". They don't load a
-       new page; they jump to the element on THIS page whose
-       id matches. href="#projects" jumps to id="projects".
-  -->
+  <!-- Nav bar -->
   <header>
     <nav>
       <a href="#top">KA</a>
@@ -40,21 +22,11 @@
     </nav>
   </header>
 
-  <!-- ========================================================
-       HERO — the first thing people see
-       ========================================================
-       <main> wraps the primary content of the page. Screen readers
-       for blind users rely on these landmark tags to navigate.
-  -->
   <main id="top">
 
+    <!-- Hero -->
     <section id="hero">
-      <!-- There should be exactly ONE <h1> per page. It is the
-           single most important line of text on the page, and
-           search engines weight it heavily. -->
       <h1>Kinan Al Hariri</h1>
-
-      <!-- <p> = paragraph. Your one-line tagline. -->
       <p>Aspiring Engineer · CS Student</p>
 
       <p>
@@ -65,17 +37,6 @@
         things that actually work.
       </p>
 
-      <!--
-        THE LINKEDIN LINK — this is the one you specifically asked for.
-
-        href     = where it goes
-        target="_blank"  = open in a NEW tab, so people don't
-                           leave your site to go to LinkedIn
-        rel="noopener"   = a security precaution. Without it, the
-                           page you opened gets limited scripting
-                           access back to yours. Always include it
-                           alongside target="_blank".
-      -->
       <a href="https://www.linkedin.com/in/kinan-alhariri-09b240375/"
          target="_blank"
          rel="noopener">
@@ -83,19 +44,7 @@
       </a>
     </section>
 
-    <!-- ========================================================
-         EXPERIENCE — your co-op
-         ========================================================
-         Notice the WHOLE <article> is now wrapped in an <a> tag.
-         Normally a link wraps just a word or two of text — but
-         HTML allows wrapping an entire block of content (heading,
-         paragraph, everything) in one <a>, which makes the ENTIRE
-         card clickable instead of just one line inside it. This
-         is a real, valid, common pattern — not a hack.
-
-         Each card is now a short TEASER, not the full story. The
-         full writeup lives on its own page in the pages/ folder.
-    -->
+    <!-- Experience: teaser card, links to pages/experience.html -->
     <section id="experience">
       <h2>Experience</h2>
 
@@ -109,24 +58,7 @@
       </a>
     </section>
 
-    <!-- ========================================================
-         PROJECTS — pictures of things you've built
-         ========================================================
-         Each project is an <article>: a self-contained chunk of
-         content that would still make sense on its own.
-
-         About the images:
-           src = the path to the image file. "images/thing.png"
-                 means "look in a folder called images, next to
-                 this HTML file, for a file called thing.png"
-           alt = a text description. Shown if the image fails to
-                 load, and READ ALOUD to blind visitors. Never
-                 leave it empty on a meaningful image.
-
-         Until you drop real image files into the images folder,
-         you'll see the alt text instead of a picture. That's
-         expected, not broken.
-    -->
+    <!-- Projects: teaser cards, each links to its own detail page -->
     <section id="projects">
       <h2>Projects</h2>
 
@@ -150,12 +82,10 @@
         </article>
       </a>
 
-      <!-- Copy an entire <a class="card-link">...</a> block to add another. -->
+      <!-- Copy an entire <a class="card-link">...</a> block to add another project. -->
     </section>
 
-    <!-- ========================================================
-         GAMES — links people can click to play
-         ======================================================== -->
+    <!-- Games -->
     <section id="games">
       <h2>Games</h2>
 
@@ -169,12 +99,7 @@
       </a>
     </section>
 
-    <!-- ========================================================
-         CONTACT
-         ========================================================
-         mailto: makes a link open the visitor's email app with
-         your address already filled in.
-    -->
+    <!-- Contact -->
     <section id="contact">
       <h2>Get in touch</h2>
       <p>Open to co-op roles, collaborations, and anything at the intersection of hardware and software.</p>
@@ -184,15 +109,10 @@
 
   </main>
 
-  <!-- <footer> = the closing strip at the bottom of the page. -->
   <footer>
     <p>&copy; 2026 Kinan Al Hariri</p>
   </footer>
 
-  <!-- Connects our JavaScript. Placed at the very bottom on purpose:
-       the browser reads this file top to bottom, so by the time it
-       reaches here, all the elements above already exist and the
-       script can find them. Does nothing yet — that's step 3. -->
   <script src="script.js"></script>
 </body>
 
