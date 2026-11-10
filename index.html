@@ -233,7 +233,52 @@
 
       <a href="pages/robot.html" class="card-link">
         <article>
-          <img src="images/robot.jpg" alt="VEX competition robot with a swerve-drive base and chain-driven ball intake, held next to a Catholic Skills medal">
+          <div class="card-art" aria-hidden="true">
+            <span class="art-corner corner-tl"></span>
+            <span class="art-corner corner-tr"></span>
+            <span class="art-corner corner-bl"></span>
+            <span class="art-corner corner-br"></span>
+            <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">
+              <!-- dimension-style guide line, like a blueprint callout -->
+              <line x1="40" y1="172" x2="280" y2="172" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <line x1="40" y1="166" x2="40" y2="178" stroke="var(--border)" stroke-width="1.5"/>
+              <line x1="280" y1="166" x2="280" y2="178" stroke="var(--border)" stroke-width="1.5"/>
+
+              <!-- antenna -->
+              <line x1="160" y1="75" x2="160" y2="44" stroke="var(--accent-2)" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="160" cy="41" r="4.5" fill="var(--accent-2)"/>
+
+              <!-- ball basket -->
+              <path d="M138 55 L182 55 L192 75 L128 75 Z" fill="var(--accent-dim)" stroke="var(--text)" stroke-width="2.5" stroke-linejoin="round"/>
+
+              <!-- chassis -->
+              <rect x="110" y="75" width="100" height="55" rx="8" fill="var(--bg-card)" stroke="var(--text)" stroke-width="3"/>
+
+              <!-- intake ramp + balls -->
+              <path d="M92 152 L122 100" stroke="var(--text)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="97" cy="142" r="5" fill="var(--accent)"/>
+              <circle cx="107" cy="123" r="5" fill="var(--accent)"/>
+              <path d="M113 108 L122 100 L128 109" fill="none" stroke="var(--text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- four independently-angled swerve modules, one per corner -->
+              <g transform="translate(110 75) rotate(18)">
+                <rect x="-13" y="-13" width="26" height="26" rx="4" fill="var(--accent-dim)" stroke="var(--accent)" stroke-width="2"/>
+                <circle r="5.5" fill="var(--accent)"/>
+              </g>
+              <g transform="translate(210 75) rotate(-12)">
+                <rect x="-13" y="-13" width="26" height="26" rx="4" fill="var(--accent-dim)" stroke="var(--accent)" stroke-width="2"/>
+                <circle r="5.5" fill="var(--accent)"/>
+              </g>
+              <g transform="translate(110 130) rotate(-22)">
+                <rect x="-13" y="-13" width="26" height="26" rx="4" fill="var(--accent-dim)" stroke="var(--accent)" stroke-width="2"/>
+                <circle r="5.5" fill="var(--accent)"/>
+              </g>
+              <g transform="translate(210 130) rotate(8)">
+                <rect x="-13" y="-13" width="26" height="26" rx="4" fill="var(--accent-dim)" stroke="var(--accent)" stroke-width="2"/>
+                <circle r="5.5" fill="var(--accent)"/>
+              </g>
+            </svg>
+          </div>
           <p class="card-eyebrow">
             <span class="icon-badge" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
