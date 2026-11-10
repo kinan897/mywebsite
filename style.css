@@ -137,8 +137,14 @@ section h2 {
   margin-bottom: var(--space-lg);
 }
 
-/* Button-style links (LinkedIn, project/game cards) */
-#hero > a,
+/* Button-style links (LinkedIn/Resume, project/game cards) */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.hero-actions > a,
 article > a {
   display: inline-block;
   background-color: var(--accent);
@@ -150,9 +156,53 @@ article > a {
   transition: opacity 0.15s ease;
 }
 
-#hero > a:hover,
+.hero-actions > a:hover,
 article > a:hover {
   opacity: 0.85;
+}
+
+/* Resume stands apart from the primary (filled) action — an outline
+   style reads as "secondary" without competing with LinkedIn. */
+.hero-actions > a.btn-secondary {
+  background-color: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
+}
+
+.hero-actions > a.btn-secondary:hover {
+  background-color: var(--accent-dim);
+  opacity: 1;
+}
+
+/* Resume link in the nav — a small pill so it reads as an action,
+   not just another page-jump link. */
+.nav-resume {
+  background-color: var(--accent);
+  color: var(--on-accent) !important;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem !important;
+  transition: opacity 0.15s ease;
+}
+
+.nav-resume:hover {
+  opacity: 0.85;
+  color: var(--on-accent) !important;
+}
+
+/* Disabled state — resume isn't linked to anything yet, but stays
+   visible as a placeholder for when it is. */
+.nav-resume[aria-disabled="true"],
+.hero-actions > a.btn-secondary[aria-disabled="true"],
+.detail-cta[aria-disabled="true"] {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.nav-resume[aria-disabled="true"]:hover,
+.hero-actions > a.btn-secondary[aria-disabled="true"]:hover {
+  opacity: 0.5;
 }
 
 /* ============================================================

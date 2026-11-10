@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quantic Learning — Kinan Al Hariri</title>
+  <meta name="description" content="Quantic Learning, a gamified STEM-tutoring app built by Kinan Al Hariri for a real tutoring company, starting as a free website and growing into a paid app commission.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="../index.html#top">KA</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#games">Games</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="nav-resume" aria-disabled="true" title="Resume coming soon">Resume</a>
+    </nav>
+  </header>
+
+  <main class="detail-page">
+
+    <a href="../index.html#projects" class="back-link">&larr; Back to Projects</a>
+
+    <p class="eyebrow">
+      <span class="icon-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6l9-3 9 3-9 3-9-3z"/>
+          <path d="M3 6v9l9 3 9-3V6"/>
+          <path d="M12 9v9"/>
+        </svg>
+      </span>
+      Client Project &middot; Paid App
+    </p>
+    <h1>Quantic Learning</h1>
+    <p class="detail-subtitle">
+      A gamified STEM-tutoring app, built from the ground up for a real tutoring company &mdash;
+      and the reason they hired me a second time.
+    </p>
+
+    <div class="detail-tags">
+      <span class="tag">FastAPI</span>
+      <span class="tag">React Native</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">SQLAlchemy</span>
+      <span class="tag">SymPy</span>
+      <span class="tag">PostgreSQL</span>
+    </div>
+
+    <div class="detail-gallery">
+      <img src="../images/quantic-logo.png" alt="Quantic Learning logo">
+    </div>
+
+    <section class="detail-block reveal">
+      <h2>How This Started</h2>
+      <p>
+        Quantic Learning is a real tutoring company. I reached out to the owner on my own
+        initiative and offered to design and build a website for him and his team &mdash; for
+        free, with no obligation. He loved the result so much that he came back with a second,
+        paid request: build the company a full learning app. I delivered that too, and he paid
+        for the work. What started as a cold outreach turned into a client relationship and a
+        production engineering project.
+      </p>
+    </section>
+
+    <section class="detail-block reveal">
+      <h2>Overview</h2>
+      <p>
+        Quantic Learning is a mobile app that teaches Ontario high school and first-year
+        university STEM courses through bite-sized, game-style lessons. Students work through a
+        path of short lessons, earn XP, keep daily streaks, and get instant, step-by-step
+        feedback on every answer &mdash; including typed math expressions like
+        <code>3x^2 - 2sin(x)</code>, not just multiple choice. Every topic follows a
+        three-lesson arc: <strong>Learn</strong> (one idea per card, with graphs and diagrams),
+        <strong>Practice</strong> (quick questions that build the foundation), and
+        <strong>Destroyer</strong> (hard, multi-step problems worth triple XP, required before
+        the next topic unlocks).
+      </p>
+    </section>
+
+    <section class="detail-block reveal">
+      <h2>Engineering Highlights</h2>
+      <ul class="detail-list">
+        <li>
+          <strong>Server-authoritative grading:</strong> lesson content never includes the
+          answers, and the server grades every attempt and calculates XP itself &mdash; the
+          app has no way to send a fake score.
+        </li>
+        <li>
+          <strong>A custom math grader, safely:</strong> typed answers are tokenized and parsed
+          into SymPy expressions by a hand-written recursive-descent parser &mdash; no
+          <code>eval</code> on user input &mdash; and equivalent forms like
+          <code>2(x+1)</code> and <code>2x+2</code> are both accepted.
+        </li>
+        <li>
+          <strong>Real authentication:</strong> Argon2id password hashing, short-lived JWT
+          access tokens, and rotating refresh tokens that detect theft &mdash; if a used refresh
+          token is replayed, every device on that login chain is signed out.
+        </li>
+        <li>
+          <strong>Content as code:</strong> every lesson is YAML, validated at startup and in
+          CI &mdash; ids, answer formats, and graph formulas are checked automatically on every
+          push via GitHub Actions.
+        </li>
+        <li>
+          <strong>Cross-platform graphs:</strong> graphs are authored as formulas, sampled
+          server-side, and rendered as SVG, so they look identical on iOS, Android, and the web.
+        </li>
+      </ul>
+    </section>
+
+    <section class="detail-block reveal">
+      <h2>Built With</h2>
+      <p>
+        A React Native (Expo + TypeScript) client ships to iOS, Android, and the web from one
+        codebase, with TanStack Query and Zustand managing server data and session state. The
+        backend is a FastAPI (Python) service with SQLAlchemy and Alembic migrations, running on
+        SQLite in development and PostgreSQL in production. Math is rendered with KaTeX for real
+        LaTeX on every platform, and the roadmap's next step is an AI tutor powered by the
+        Claude API that explains a student's specific mistake.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Kinan Al Hariri</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+
+</html>
