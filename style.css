@@ -9,8 +9,10 @@
   --border: #f0d9e0;        /* borders */
   --text: #24141a;          /* main text */
   --text-dim: #7a6167;      /* secondary text */
-  --accent: #e8447a;        /* pink accent — links, buttons, headings */
+  --accent: #e8447a;        /* pink accent — links, buttons, labels */
   --accent-dim: #fdeaf1;    /* pale pink fill behind accent elements */
+  --accent-2: #0f9e95;      /* teal — a second accent, used sparingly for contrast */
+  --accent-2-dim: #e2f6f4;  /* pale teal fill */
   --on-accent: #ffffff;     /* text color for anything sitting on an accent fill */
   --warn: #d97706;          /* amber, used for "pending" states */
 
@@ -112,13 +114,105 @@ section {
 section h2 {
   font-size: 2rem;
   margin-bottom: var(--space-lg);
+  color: var(--text);
+}
+
+/* small pink label above a section heading — pink now marks a
+   "label or action", dark text marks a heading, instead of every
+   heading being pink. */
+.section-kicker {
   color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
 }
 
 /* Hero */
 #hero {
   padding-top: var(--space-xl);
   padding-bottom: var(--space-xl);
+}
+
+/* two-column layout: text on the left, a floating stat-chip cluster
+   on the right so the hero doesn't end in a wall of empty space */
+.hero-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.hero-content {
+  flex: 1 1 420px;
+}
+
+.hero-visual {
+  position: relative;
+  flex: 1 1 320px;
+  min-height: 320px;
+}
+
+.stat-chip {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-sm) var(--space-md);
+  box-shadow: 0 10px 30px -14px rgba(36, 20, 26, 0.25);
+  white-space: nowrap;
+}
+
+.stat-chip .icon-badge {
+  width: 26px;
+  height: 26px;
+  margin-right: 0;
+}
+
+.stat-chip-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.stat-chip-text strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.stat-chip-text span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stat-chip-1 { top: 0;      left: 8%;   transform: rotate(-4deg); }
+.stat-chip-2 { top: 112px;  right: 0;   transform: rotate(3deg);  border-color: var(--accent-2); }
+.stat-chip-3 { bottom: 64px; left: 0;   transform: rotate(4deg);  border-color: var(--accent); }
+.stat-chip-4 { bottom: 0;   right: 12%; transform: rotate(-3deg); }
+
+@media (max-width: 900px) {
+  .hero-visual {
+    min-height: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .stat-chip {
+    position: static;
+    transform: none !important;
+    white-space: normal;
+  }
 }
 
 #hero h1 {
@@ -209,12 +303,35 @@ article > a:hover {
    CARD GRID (Experience / Projects / Games)
    ============================================================ */
 #projects {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-md);
 }
 
-#projects h2 {
+/* a full-bleed pale-pink wash behind Projects — breaks up the run of
+   plain white between Skills/Experience and the dark Games band */
+#projects::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  background-color: var(--accent-dim);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#projects > * {
+  position: relative;
+  z-index: 1;
+}
+
+#projects h2,
+#projects .section-kicker {
   grid-column: 1 / -1;   /* section heading spans the full grid width */
 }
 
@@ -243,7 +360,8 @@ article > a:hover {
   gap: var(--space-md);
 }
 
-#games h2 {
+#games h2,
+#games .section-kicker {
   flex-basis: 100%;
 }
 
@@ -625,18 +743,43 @@ html {
 /* ============================================================
    RETRO / PIXEL FRAME — Games section
    ============================================================ */
+/* Games gets its own dark "arcade" band — a deliberate break from the
+   light theme everywhere else on the page. Redefining the shared
+   color variables inside #games means every card, heading, and list
+   inside it (which all already reference var(--text), var(--border),
+   etc.) re-themes automatically, with no separate dark-mode rules
+   needed per component. */
 #games {
+  --bg-card: #201531;
+  --border: #4a3760;
+  --text: #f8f1f6;
+  --text-dim: #cbb9d1;
   position: relative;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
 }
 
-/* a faint dot grid behind the games card, like graph/pixel paper */
+/* full-bleed dark backdrop, edge to edge regardless of the section's
+   own max-width */
 #games::before {
   content: "";
   position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  background-color: #140c1f;
+  z-index: 0;
+}
+
+/* faint dot grid on top of the dark backdrop, like graph/pixel paper */
+#games::after {
+  content: "";
+  position: absolute;
   inset: 0;
-  background-image: radial-gradient(var(--border) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
   background-size: 18px 18px;
-  opacity: 0.6;
   pointer-events: none;
   z-index: 0;
 }
@@ -644,6 +787,12 @@ html {
 #games > * {
   position: relative;
   z-index: 1;
+}
+
+/* the quick-facts panel's shadow runs teal instead of pink, so the
+   two cards in each row read as a pair without being identical */
+.game-facts.pixel-frame {
+  box-shadow: 5px 5px 0 0 var(--accent-2);
 }
 
 /* sharp corners + a solid offset shadow instead of a blurred one —

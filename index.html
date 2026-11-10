@@ -33,26 +33,91 @@
       <span class="blueprint-corner corner-bl" aria-hidden="true"></span>
       <span class="blueprint-corner corner-br" aria-hidden="true"></span>
 
-      <h1>Kinan Al Hariri</h1>
-      <p>Aspiring Engineer · CS Student</p>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <h1>Kinan Al Hariri</h1>
+          <p>Aspiring Engineer · CS Student</p>
 
-      <p>
-        I build at the intersection of hardware and software — from a
-        competition robot with a swerve-drive base to mobile apps
-        . Three years of hands-on coding across Python, Java,
-        JavaScript, and React Native, with a growing habit of shipping
-        things that actually work.
-      </p>
+          <p>
+            I build at the intersection of hardware and software — from a
+            competition robot with a swerve-drive base to mobile apps
+            . Three years of hands-on coding across Python, Java,
+            JavaScript, and React Native, with a growing habit of shipping
+            things that actually work.
+          </p>
 
-      <div class="hero-actions">
-        <a href="https://www.linkedin.com/in/kinan-alhariri-09b240375/"
-           target="_blank"
-           rel="noopener">
-          View my LinkedIn
-        </a>
-        <a class="btn-secondary" aria-disabled="true" title="Resume coming soon">
-          Download Resume
-        </a>
+          <div class="hero-actions">
+            <a href="https://www.linkedin.com/in/kinan-alhariri-09b240375/"
+               target="_blank"
+               rel="noopener">
+              View my LinkedIn
+            </a>
+            <a class="btn-secondary" aria-disabled="true" title="Resume coming soon">
+              Download Resume
+            </a>
+          </div>
+        </div>
+
+        <!-- floating stat chips — decorative, so hidden from assistive tech -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="stat-chip stat-chip-1">
+            <span class="icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <polyline points="12 7 12 12 16 14"/>
+              </svg>
+            </span>
+            <div class="stat-chip-text">
+              <strong>3+</strong>
+              <span>Years Coding</span>
+            </div>
+          </div>
+
+          <div class="stat-chip stat-chip-2">
+            <span class="icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="8" width="18" height="9" rx="4"/>
+                <line x1="5.5" y1="12.5" x2="8.5" y2="12.5"/>
+                <line x1="7" y1="11" x2="7" y2="14"/>
+                <circle cx="16" cy="11.5" r="0.8" fill="currentColor"/>
+                <circle cx="18" cy="13.5" r="0.8" fill="currentColor"/>
+              </svg>
+            </span>
+            <div class="stat-chip-text">
+              <strong>2</strong>
+              <span>Games Shipped</span>
+            </div>
+          </div>
+
+          <div class="stat-chip stat-chip-3">
+            <span class="icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="15" r="5"/>
+                <path d="M9 11 7 3h2l3 7"/>
+                <path d="M15 11 17 3h-2l-3 7"/>
+                <path d="M12 13v4"/>
+              </svg>
+            </span>
+            <div class="stat-chip-text">
+              <strong>Medalist</strong>
+              <span>VEX Robotics</span>
+            </div>
+          </div>
+
+          <div class="stat-chip stat-chip-4">
+            <span class="icon-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="8" width="18" height="12" rx="2"/>
+                <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                <line x1="3" y1="13" x2="21" y2="13"/>
+              </svg>
+            </span>
+            <div class="stat-chip-text">
+              <strong>1</strong>
+              <span>Paid Client App</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -61,6 +126,7 @@
     <section class="split-row reveal">
 
       <div id="skills" class="split-col">
+        <p class="section-kicker">Toolbox</p>
         <h2>Skills</h2>
         <div class="skills-grid">
           <div class="skill-tile" style="--tile-color:#3776AB">
@@ -136,6 +202,7 @@
       </div>
 
       <div id="experience" class="split-col">
+        <p class="section-kicker">Where I've Worked</p>
         <h2>Experience</h2>
 
         <a href="pages/experience.html" class="card-link">
@@ -161,6 +228,7 @@
 
     <!-- Projects: teaser cards, each links to its own detail page -->
     <section id="projects" class="reveal">
+      <p class="section-kicker">What I've Built</p>
       <h2>Projects</h2>
 
       <a href="pages/robot.html" class="card-link">
@@ -246,6 +314,7 @@
 
     <!-- Games: retro/pixel accents (.pixel-frame on the card, dot-grid behind the section) -->
     <section id="games" class="reveal">
+      <p class="section-kicker">Side Quests</p>
       <h2>Games</h2>
 
       <a href="pages/fish-out-of-water.html" class="card-link">
@@ -330,6 +399,7 @@
 
     <!-- Contact -->
     <section id="contact" class="reveal">
+      <p class="section-kicker">Let's Talk</p>
       <h2>Get in touch</h2>
       <p>Open to co-op roles, collaborations, and anything at the intersection of hardware and software.</p>
       <a href="mailto:kinanalhariri88@gmail.com">
