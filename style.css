@@ -350,6 +350,13 @@ article > a:hover {
   scroll-margin-top: 80px;   /* these are <div>s now, not <section>s, so they need their own nav-offset rule */
 }
 
+/* a second (or third) stacked card within a split-col, e.g. a second
+   Experience entry — gives it breathing room from the card above it */
+.split-col .card-link + .card-link {
+  display: block;
+  margin-top: var(--space-md);
+}
+
 /* Games uses flex instead of the shared grid above — with only one
    card right now, a grid track would leave an odd empty gap beside
    it. flex-wrap lets it size to its own content and still wrap
