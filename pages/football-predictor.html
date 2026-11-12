@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Football Match Predictor — Kinan Al Hariri</title>
+  <meta name="description" content="A machine-learning model built by Kinan Al Hariri that predicts win/draw/loss probabilities for top European football leagues, running entirely client-side in the browser.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="../index.html#top">KA</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../index.html#games">Games</a>
+      <a href="../index.html#contact">Contact</a>
+      <a href="../Kinan_AlHariri_Resume.pdf" target="_blank" rel="noopener" class="nav-resume">Resume</a>
+    </nav>
+  </header>
+
+  <main class="detail-page">
+
+    <a href="../index.html#projects" class="back-link">&larr; Back to Projects</a>
+
+    <p class="eyebrow">
+      <span class="icon-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 17l5-5 4 4 8-9"/>
+          <path d="M15 7h5v5"/>
+        </svg>
+      </span>
+      Machine Learning &middot; Client-Side Inference
+    </p>
+    <h1>Football Match Predictor</h1>
+    <p class="detail-subtitle">
+      A model that predicts win/draw/loss probabilities for top European
+      football leagues &mdash; trained in Python, running entirely in your
+      browser with no server behind it.
+    </p>
+
+    <div class="detail-tags">
+      <span class="tag">Python</span>
+      <span class="tag">scikit-learn</span>
+      <span class="tag">XGBoost</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">NumPy</span>
+      <span class="tag">JavaScript</span>
+    </div>
+
+    <section class="detail-block reveal">
+      <h2>Overview</h2>
+      <p>
+        A machine-learning site that estimates win, draw, and loss
+        probabilities for matches in the Premier League, La Liga,
+        Bundesliga, Serie A, Ligue 1, and the UEFA Champions League. The
+        models are trained on 14,000+ matches since 2019, pulled from
+        ESPN's public API, and the whole thing ships as a static site
+        &mdash; the trained model runs client-side, so there's no backend
+        making predictions on the fly.
+      </p>
+    </section>
+
+    <section class="detail-block reveal">
+      <h2>Engineering Highlights</h2>
+      <ul class="detail-list">
+        <li>
+          <strong>Time-aware features:</strong> 58 pre-match features
+          &mdash; rolling form, an Elo rating, home advantage, rest days,
+          a Champions League flag &mdash; each computed strictly from
+          matches finished before kickoff, so the model never sees
+          information it wouldn't have had in real time.
+        </li>
+        <li>
+          <strong>Two models, validated properly:</strong> a Random Forest
+          and XGBoost, both tuned with time-series cross-validation rather
+          than a random split, so training always respects chronological
+          order instead of accidentally peeking into the future.
+        </li>
+        <li>
+          <strong>Zero backend:</strong> the trained Random Forest is
+          exported to JSON and runs directly in the browser in plain
+          JavaScript &mdash; a prediction happens entirely client-side.
+        </li>
+        <li>
+          <strong>Honest benchmarking:</strong> evaluated on 2,455 unseen
+          matches, the Random Forest hits about 52.6% accuracy and XGBoost
+          about 52.9% &mdash; both ahead of the always-predict-home-win
+          baseline (45.0%), and roughly matching a pure Elo-rating model
+          (52.8%), with real-world bookmakers typically landing around
+          53&ndash;55%.
+        </li>
+      </ul>
+    </section>
+
+    <section class="detail-block reveal">
+      <h2>Built With</h2>
+      <p>
+        Data pipeline and model training run on Python &mdash; pandas and
+        NumPy for feature engineering, scikit-learn and XGBoost for the
+        models themselves. The deployed site is plain HTML, CSS, and
+        JavaScript with the exported model baked in, hosted on Netlify.
+      </p>
+    </section>
+
+    <p style="margin-bottom: var(--space-sm);">Built for learning &mdash; not betting advice.</p>
+    <a href="https://github.com/kinan897/Prediction-Model-" target="_blank" rel="noopener" class="detail-cta">
+      View on GitHub &rarr;
+    </a>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Kinan Al Hariri</p>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+
+</html>
